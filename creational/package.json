@@ -1,0 +1,13 @@
+{
+  "name": "creational-patterns",
+  "version": "1.0.0",
+  "description": "code used in Platzi Creational Patterns course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile:project": "npx tsc -p tsconfig.json",
+    "compile:file": "npx tsc"
+  },
+  "author": "Daniel Basulto",
+  "license": "ISC"
+}
