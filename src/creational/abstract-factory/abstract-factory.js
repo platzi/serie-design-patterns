@@ -4,7 +4,7 @@
  * 1. Declare base products classes/interfaces for each product
  *  in the catalog.
  *
- * Products interfaces:
+ * Products classes:
  *  - MastodonCar
  *  - RhinoCar
  *
@@ -35,80 +35,87 @@
  */
 
 /** STEP 1 */
-interface MastodonCar {
-  useGPS(): void;
+class MastodonCar {
+  useGPS() {
+    throw new Error('Method not implemented!');
+  }
 }
 
-interface RhinoCar {
-  useGPS(): void;
+class RhinoCar {
+  useGPS() {
+    throw new Error('Method not implemented!');
+  }
 }
 
 /** STEP 2 */
-class MastodonSedanCar implements MastodonCar {
-  useGPS(): void {
+class MastodonSedanCar extends MastodonCar {
+  useGPS() {
     console.log('[SEDAN] Mastodon GPS');
   }
 }
 
-class MastodonHatchbackCar implements MastodonCar {
-  useGPS(): void {
+class MastodonHatchbackCar extends MastodonCar {
+  useGPS() {
     console.log('[HATCHBACK] Mastodon GPS');
   }
 }
 
-class RhinoSedanCar implements RhinoCar {
-  useGPS(): void {
+class RhinoSedanCar extends RhinoCar {
+  useGPS() {
     console.log('[SEDAN] Rhino GPS');
   }
 }
 
-class RhinoHatchbackCar implements RhinoCar {
+class RhinoHatchbackCar extends RhinoCar {
   useGPS() {
     console.log('[HATCHBACK] Rhino GPS');
   }
 }
 
 /** STEP 3 */
-interface CarAbstractFactory {
-  createMastodon(): MastodonCar;
-  createRhino(): RhinoCar;
+class CarAbstractFactory {
+  createMastodon() {
+    throw new Error('Method not implemented!');
+  }
+
+  createRhino() {
+    throw new Error('Method not implemented!');
+  }
 }
 
 /** STEP 4 */
-class SedanCarFactory implements CarAbstractFactory {
-  createMastodon(): MastodonCar {
+class SedanCarFactory {
+  createMastodon() {
     return new MastodonSedanCar();
   }
 
-  createRhino(): RhinoCar {
+  createRhino() {
     return new RhinoSedanCar();
   }
 }
 
-class HatchbackCarFactory implements CarAbstractFactory {
-  createMastodon(): MastodonCar {
+class HatchbackCarFactory {
+  createMastodon() {
     return new MastodonHatchbackCar();
   }
 
-  createRhino(): RhinoCar {
+  createRhino() {
     return new RhinoHatchbackCar();
   }
 }
 
-function appCarFactory(factory: CarAbstractFactory) {
-  const mastodon: MastodonCar = factory.createMastodon();
-  const rhino: RhinoCar = factory.createRhino();
+function appCarFactory(factory) {
+  const mastodon = factory.createMastodon();
+  const rhino = factory.createRhino();
 
   mastodon.useGPS();
   rhino.useGPS();
 }
 
-/** Passing a concrete factory */
 appCarFactory(new HatchbackCarFactory());
 appCarFactory(new SedanCarFactory());
 
-type FactoryType = 'sedan' | 'hatchback';
-function createFactory(type: FactoryType): CarAbstractFactory {
+function createFactory(type) {
   const factories = {
     sedan: SedanCarFactory,
     hatchback: HatchbackCarFactory,
@@ -118,9 +125,5 @@ function createFactory(type: FactoryType): CarAbstractFactory {
   return new Factory();
 }
 
-/** Having a factory of factories implementation */
 appCarFactory(createFactory('sedan'));
 appCarFactory(createFactory('hatchback'));
-
-// This is not relevant for the course, don't worry about this
-export {};

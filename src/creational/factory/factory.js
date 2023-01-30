@@ -1,95 +1,74 @@
 /**
  * How to implement Factory?
  *
- * 1. Make all Products follow the same interface/contract.
- * 2. Make all Factorories follow the same interface/contract
- *  and declare a create (factory) method that returns objects
- *  that follow the common Product interface.
- * 3. Create Products subclasses as you require.
- * 3. Create Factories subclasses for each type of Product that
- *  you have. Implement the factory/create method to return
- *  the correct Prodcut in each subclass.
+ * 1. Declare base product class/interface, this will be returned by
+ *  factory class and their sub classes.
+ * 2. Implement concrete products sub classes that inherits/implements
+ *  the base product class/interface.
+ * 3. Declare factory class/interface that returns objects that match
+ *  the base product, not the concrete products.
+ * 4. Implement concrete factories sub classes that inherits/implements
+ *  the base factory class/interface. These classes will return concrete
+ *  products in their factory method.
  */
 
-/** Class representing a Base Car */
+/** STEP 1 */
 class BaseCar {
   showCost() {
-    throw new Error("Method showCost not implemented!");
+    throw new Error('Method not implemented!');
   }
 }
 
+/** STEP 2 */
 class MastodonCar extends BaseCar {
-  /** @override showCost() method */
   showCost() {
-    console.log("Mastodon car cost $50,000 USD");
+    console.log('Mastodon Car Cost: 300,000 MXN');
   }
 }
 
 class RhinoCar extends BaseCar {
-  /** @override showCost() method */
   showCost() {
-    console.log("Mastodon car cost $70,000 USD");
+    console.log('Rhino Car Cost: 100,000 MXN');
   }
 }
 
-/** Class representing a Base Factory */
-class BaseCarFactory {
-  produceCar() {
-    throw new Error("Method produceCar() not implemented!");
+/** STEP 3 */
+class CarFactory {
+  makeCar() {
+    throw new Error('Method not implemented!');
   }
 }
 
-/** Class representing a Mastodon Car Factory. */
-class MastodonCarFactory extends BaseCarFactory {
-  /** @override create method */
-  produceCar() {
+/** STEP 4 */
+class MastodonCarFactory extends CarFactory {
+  makeCar() {
     return new MastodonCar();
   }
 }
 
-/** Class representing a Mastodon Car Factory. */
-class RhinoCarFactory extends BaseCarFactory {
-  /** @override create method */
-  produceCar() {
+class RhinoCarFactory extends CarFactory {
+  makeCar() {
     return new RhinoCar();
   }
 }
 
-function app(factory) {
-  if (!factory) {
-    return;
-  }
-
-  const car = factory.produceCar();
+function appFactory(factory) {
+  const car = factory.makeCar();
   car.showCost();
-  car.countWheels();
 }
 
-/**
- * We could change the Factory as you wish since
- * all of them implement the same behaviour.
- */
-app(new MastodonCarFactory());
-app(new RhinoCarFactory());
+// appFactory(new MastodonCarFactory());
+// appFactory(new RhinoCarFactory());
 
-/**
- * Let's abstract the factories creation
- * @param type type of car factory
- * @returns A car factory instance based
- */
 function createFactory(type) {
   const factories = {
     mastodon: MastodonCarFactory,
     rhino: RhinoCarFactory,
   };
 
-  const factory = new factories[type]();
-  return factory;
+  const Factory = factories[type];
+  return new Factory();
 }
 
-/**
- * Instead of using new() operator, we abstract the
- * factories creation and we just indicate the type
- */
-app(createFactory("mastodon"));
-app(createFactory("rhino"));
+appFactory(createFactory('mastodon'));
+appFactory(createFactory('rhino'));

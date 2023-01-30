@@ -1,37 +1,51 @@
 /**
  * How to implement Singleton?
  *
- * 1. Make the constructor method private. This help us to avoid the use of new() operator.
- * 2. Create a static method that works as constructor. Behind scenes, this will call the private
- * constructor to create an instance and save it in a static attribute.
+ * 1. Make the constructor private
+ * 2. Create a static method who calls the private
+ *  constructor and save the instance in a static variable
  */
-class SingletonN {
-  // static to be used without an instance
-  private static _instance: SingletonN;
+class SingletonTS {
+  private static instance: SingletonTS;
+  private version: string;
 
-  // Only available inside of the class
-  private constructor() {}
+  private constructor(version: string) {
+    this.version = version;
+  }
 
-  /**
-   * This static creation method acts as a constructor.
-   * Internally calls the private constructor to create a new class instance and saves it in a static field.
-   * All following calls to this method return the cached object.
-   */
-  public static getInstance() {
-    if (!this._instance) {
-      SingletonN._instance = new SingletonN();
+  static getInstance(version: string): SingletonTS {
+    if (!SingletonTS.instance) {
+      SingletonTS.instance = new SingletonTS(version);
     }
 
-    return this._instance;
+    return SingletonTS.instance;
+  }
+
+  getVersion(): string {
+    return this.version;
   }
 }
 
-function appSingletonN() {
-  const obj1 = SingletonN.getInstance();
-  const obj2 = SingletonN.getInstance();
-  // const obj3 = new SingletonN(); // Not possible since constructor is private
+function appSingletonTS() {
+  const singleton1 = SingletonTS.getInstance('version-1');
+  const singleton2 = SingletonTS.getInstance('version-2');
+  const singleton3 = SingletonTS.getInstance('version-3');
 
-  console.log(obj1 === obj2); // true
+  console.log(
+    `singleton1 and singleton2 are equal? ${
+      singleton1 === singleton2 ? 'yes' : 'no'
+    }`
+  );
+  console.log(
+    `singleton2 and singleton3 are equal? ${
+      singleton2 === singleton3 ? 'yes' : 'no'
+    }`
+  );
+
+  // Let's verify if the versions are equal too
+  console.log(`singleton1 version: ${singleton1.getVersion()}`);
+  console.log(`singleton2 version: ${singleton2.getVersion()}`);
+  console.log(`singleton3 version: ${singleton3.getVersion()}`);
 }
 
-appSingletonN();
+appSingletonTS();

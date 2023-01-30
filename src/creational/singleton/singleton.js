@@ -1,28 +1,50 @@
 /**
  * How to implement Singleton?
  *
- * 1. Make the constructor method private. This help us to avoid the use of new() operator.
- * 2. Create a static method that works as constructor. Behind scenes, this will call the private
- * constructor to create an instance and save it in a static attribute.
+ * 1. Make the constructor private
+ * 2. Create a static method who calls the private
+ *  constructor and save the instance in a static variable
  */
 class Singleton {
-  constructor(prop) {
-    this.prop = prop;
+  static instance = undefined;
 
-    // instance prop is added with dot notation
-    if (typeof Singleton.instance === "object") {
-      return Singleton.instance;
+  constructor(version) {
+    this.version = version;
+  }
+
+  static getInstance(version) {
+    if (!Singleton.instance) {
+      Singleton.instance = new Singleton(version);
     }
 
-    // Only the first version of the instance is being assigned
-    Singleton.instance = this;
-    return this;
+    return Singleton.instance;
+  }
+
+  getVersion() {
+    return this.version;
   }
 }
 
 function appSingleton() {
-  const obj = new Singleton("first version");
-  const obj2 = new Singleton("second version");
+  const singleton1 = Singleton.getInstance('version-1');
+  const singleton2 = Singleton.getInstance('version-2');
+  const singleton3 = Singleton.getInstance('version-3');
 
-  console.log(obj === obj2); // true
+  console.log(
+    `singleton1 and singleton2 are equal? ${
+      singleton1 === singleton2 ? 'yes' : 'no'
+    }`
+  );
+  console.log(
+    `singleton2 and singleton3 are equal? ${
+      singleton2 === singleton3 ? 'yes' : 'no'
+    }`
+  );
+
+  // Let's verify if the versions are equal too
+  console.log(`singleton1 version: ${singleton1.getVersion()}`);
+  console.log(`singleton2 version: ${singleton2.getVersion()}`);
+  console.log(`singleton3 version: ${singleton3.getVersion()}`);
 }
+
+appSingleton();
