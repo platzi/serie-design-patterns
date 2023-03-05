@@ -38,7 +38,7 @@
  *
  */
 
-/** STEP 1 */
+// STEP 1
 interface MastodonCar {
   useGPS(): void;
 }
@@ -47,7 +47,7 @@ interface RhinoCar {
   useGPS(): void;
 }
 
-/** STEP 2 */
+// STEP 2
 class MastodonSedanCar implements MastodonCar {
   /** @override useGPS() method */
   useGPS(): void {
@@ -76,13 +76,13 @@ class RhinoHatchbackCar implements RhinoCar {
   }
 }
 
-/** STEP 3 */
+// STEP 3
 interface CarAbstractFactory {
   createMastodon(): MastodonCar;
   createRhino(): RhinoCar;
 }
 
-/** STEP 4 */
+// STEP 4
 class SedanCarFactory implements CarAbstractFactory {
   /**
    * @override createMastodon() method

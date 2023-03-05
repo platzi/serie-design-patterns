@@ -30,14 +30,14 @@
  *
  */
 
-/** STEP 1 */
+// STEP 1
 class BaseCar {
   showCost() {
     throw new Error('Method not implemented!');
   }
 }
 
-/** STEP 2 */
+// STEP 2
 class MastodonCar extends BaseCar {
   /** @override showCost() method */
   showCost() {
@@ -52,14 +52,14 @@ class RhinoCar extends BaseCar {
   }
 }
 
-/** STEP 3 */
+// STEP 3
 class CarFactory {
   makeCar() {
     throw new Error('Method not implemented!');
   }
 }
 
-/** STEP 4 */
+// STEP 4
 class MastodonCarFactory extends CarFactory {
   /**
    * @override makeCar() method

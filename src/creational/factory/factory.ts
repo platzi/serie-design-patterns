@@ -30,12 +30,12 @@
  *
  */
 
-/** STEP 1 */
+// STEP 1
 interface BaseCar {
   showCost(): void;
 }
 
-/** STEP 2 */
+// STEP 2
 class MastodonCar implements BaseCar {
   /** @override showCost() method */
   showCost(): void {
@@ -50,12 +50,12 @@ class RhinoCar implements BaseCar {
   }
 }
 
-/** STEP 3 */
+// STEP 3
 interface CarFactory {
   makeCar(): BaseCar;
 }
 
-/** STEP 4 */
+// STEP 4
 class MastodonCarFactory implements CarFactory {
   /**
    * @implements makeCar() method

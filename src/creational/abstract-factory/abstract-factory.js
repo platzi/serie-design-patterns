@@ -38,7 +38,7 @@
  *
  */
 
-/** STEP 1 */
+// STEP 1
 class MastodonCar {
   useGPS() {
     throw new Error('Method not implemented!');
@@ -51,7 +51,7 @@ class RhinoCar {
   }
 }
 
-/** STEP 2 */
+// STEP 2
 class MastodonSedanCar extends MastodonCar {
   /** @override useGPS() method */
   useGPS() {
@@ -80,7 +80,7 @@ class RhinoHatchbackCar extends RhinoCar {
   }
 }
 
-/** STEP 3 */
+// STEP 3
 class CarAbstractFactory {
   createMastodon() {
     throw new Error('Method not implemented!');
@@ -91,7 +91,7 @@ class CarAbstractFactory {
   }
 }
 
-/** STEP 4 */
+// STEP 4
 class SedanCarFactory {
   /**
    * @override createMastodon() method
