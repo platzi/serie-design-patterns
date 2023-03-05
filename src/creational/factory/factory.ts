@@ -39,14 +39,14 @@ interface BaseCar {
 class MastodonCar implements BaseCar {
   /** @override showCost() method */
   showCost(): void {
-    console.log('Mastodon Car Cost: 300,000 MXN');
+    console.log('[MASTODON] Car Cost: 300,000 MXN');
   }
 }
 
 class RhinoCar implements BaseCar {
   /** @implements showCost() method */
   showCost(): void {
-    console.log('Rhino Car Cost: 100,000 MXN');
+    console.log('[RHINO] Car Cost: 100,000 MXN');
   }
 }
 
@@ -82,6 +82,11 @@ class RhinoCarFactory implements CarFactory {
  */
 function appFactory(factory: CarFactory) {
   console.log('--- [TS] Calling appFactory ---');
+  if (!factory) {
+    console.log('--- No factory provided ---');
+    return;
+  }
+
   const car: BaseCar = factory.makeCar();
   car.showCost();
 }
@@ -93,19 +98,19 @@ function appFactory(factory: CarFactory) {
 appFactory(new MastodonCarFactory());
 appFactory(new RhinoCarFactory());
 
-type FactoryName = 'mastodon' | 'rhino';
+type FactoryType = 'mastodon' | 'rhino';
 /**
  * Let's abstract the factories creation
- * @param name name of the factory to create
+ * @param type type of factory to create
  * @returns A car factory instance
  */
-function createFactory(name: FactoryName) {
+function createFactory(type: FactoryType) {
   const factories = {
     mastodon: MastodonCarFactory,
     rhino: RhinoCarFactory,
   };
 
-  const FactoryClass = factories[name];
+  const FactoryClass = factories[type];
   return new FactoryClass();
 }
 

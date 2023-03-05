@@ -41,14 +41,14 @@ class BaseCar {
 class MastodonCar extends BaseCar {
   /** @override showCost() method */
   showCost() {
-    console.log('Mastodon Car Cost: 300,000 MXN');
+    console.log('[MASTODON] Car Cost: 300,000 MXN');
   }
 }
 
 class RhinoCar extends BaseCar {
   /** @override showCost() method */
   showCost() {
-    console.log('Rhino Car Cost: 100,000 MXN');
+    console.log('[RHINO] Car Cost: 100,000 MXN');
   }
 }
 
@@ -104,16 +104,16 @@ appFactory(new RhinoCarFactory());
 
 /**
  *
- * @param {string} name name of the factory to create
+ * @param {string} type type of factory to create
  * @returns {MastodonCarFactory | RhinoCarFactory} A car factory instance
  */
-function createFactory(name) {
+function createFactory(type) {
   const factories = {
     mastodon: MastodonCarFactory,
     rhino: RhinoCarFactory,
   };
 
-  const FactoryClass = factories[name];
+  const FactoryClass = factories[type];
   return new FactoryClass();
 }
 
