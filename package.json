@@ -1,11 +1,11 @@
 {
   "name": "creational-patterns",
   "version": "1.0.0",
-  "description": "code used in Platzi Creational Patterns course",
+  "description": "Code used in Platzi Design Patterns: Creational Course",
   "scripts": {
     "compile:project": "npx tsc -p tsconfig.json",
     "compile:file": "npx tsc",
-    "ts:file": "ts-node"
+    "ts:run": "ts-node"
   },
   "author": "Daniel Basulto",
   "license": "ISC",
