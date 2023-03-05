@@ -44,6 +44,9 @@ class Singleton {
   }
 }
 
+/**
+ * Main function
+ */
 function appSingleton() {
   console.log('--- [JS] Calling appSingleton ---');
   const singleton1 = Singleton.getInstance('version-1');
