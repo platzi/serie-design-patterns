@@ -3,13 +3,31 @@
  *
  * 1. Declare base product class/interface, this will be returned by
  *  factory class and their sub classes.
+ *
+ * Base product:
+ *  - BaseCar
+ *
  * 2. Implement concrete products sub classes that inherits/implements
  *  the base product class/interface.
- * 3. Declare factory class/interface that returns objects that match
+ *
+ * Concrete products:
+ *  - MastodonCar
+ *  - RhinoCar
+ *
+ * 3. Declare base factory class/interface that returns objects that match
  *  the base product, not the concrete ones.
+ *
+ * Base factory:
+ *  - CarFactory
+ *
  * 4. Implement concrete factories sub classes that inherits/implements
  *  the base factory class/interface. These classes will return concrete
  *  products in their factory method.
+ *
+ * Concrete factories:
+ *  - MastodonCarFactory
+ *  - RhinoCarFactory
+ *
  */
 
 /** STEP 1 */
