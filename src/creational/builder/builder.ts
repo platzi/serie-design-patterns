@@ -65,21 +65,12 @@
  *  in Mastodon and Rhino car classes constructors.
  *
  *  Change 7: Add more comments to code.
- *
- *  Change 8: Created a builder.types file and moved some of the type definitions
- *  inside of it.
- *
- *  Change 9: Rename file to builder.main.ts
  */
 
-import {
-  AvailableColors,
-  CarCatalog,
-  EditionsType,
-} from '@creational/builder/builder.types';
+export type AvailableColors = 'red' | 'black' | 'gray' | 'blue' | 'default';
 
 // STEP 1
-interface CarProductionLine {
+export interface CarProductionLine {
   setAirBags(howMany: number): CarProductionLine;
   setColor(color: AvailableColors): CarProductionLine;
   setEdition(edition: string): CarProductionLine;
@@ -87,7 +78,9 @@ interface CarProductionLine {
 }
 
 // STEP 2
+type CarCatalog = 'mastodon' | 'rhino';
 type ConstructorParams = { modelToCustomizeInLine: CarCatalog };
+type EditionsType = 'cvt' | 'signature' | 'default';
 class SedanProductionLine implements CarProductionLine {
   private sedanCar!: BaseCar;
   private modelToCustomizeInLine!: CarCatalog;
@@ -221,7 +214,7 @@ class RhinoSedanCar extends BaseCar {
 }
 
 // STEP 4
-class Director {
+export class Director {
   private productionLine!: CarProductionLine;
 
   /**
@@ -236,20 +229,14 @@ class Director {
    * Sedan CVT Edition customization steps
    */
   constructCvtEdition(): void {
-    this.productionLine
-      .setAirBags(4)
-      .setColor('blue')
-      .setEdition('CVT');
+    this.productionLine.setAirBags(4).setColor('blue').setEdition('CVT');
   }
 
   /**
    * Sedan Signature Edition customization steps
    */
   constructSignatureEdition(): void {
-    this.productionLine
-      .setAirBags(8)
-      .setColor('gray')
-      .setEdition('Signature');
+    this.productionLine.setAirBags(8).setColor('gray').setEdition('Signature');
   }
 }
 
