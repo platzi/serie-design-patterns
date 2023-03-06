@@ -6,13 +6,10 @@
     /* Modules */
     "module": "CommonJS",
     "rootDir": ".",
-    "baseUrl": "src/" /* Specify the root folder within your source files. */,
-    "moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
+    "baseUrl": "src/",
+    "moduleResolution": "node",
     "outDir": "./lib",
     "strict": true,
-    "paths": {
-      "@creational/*": ["creational/*"]
-    },
     "skipLibCheck": true,
     "allowJs": true,
     "checkJs": false

@@ -5,7 +5,8 @@
   "scripts": {
     "compile:project": "npx tsc -p tsconfig.json",
     "compile:file": "npx tsc",
-    "ts:run": "ts-node"
+    "ts:run": "ts-node",
+    "js:run": "node"
   },
   "author": "Daniel Basulto",
   "license": "ISC",

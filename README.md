@@ -1,25 +1,47 @@
-# Install dependencies
+# Design Patterns Platzi Courses
 
-```sh
-$ yarn
-```
+## Requirements
 
-or
+- node
+- npm
+- yarn (optional)
+
+## Install dependencies
 
 ```sh
 $ npm install
 ```
 
-# Run code
-
-## javascript
+or using `yarn`
 
 ```sh
-$ node file-to-run.js
+$ yarn
 ```
 
-## typescript
+## Run code
+
+### javascript
 
 ```sh
-$ yarn run ts:run file-to-run.ts
+$ npm run js:run src/{pattern-category}/{pattern-name}/file-to-run.js
+```
+
+### typescript
+
+```sh
+$ npm run ts:run src/{pattern-category}/{pattern-name}/file-to-run.ts
+```
+
+or using `yarn`
+
+### javascript
+
+```sh
+$ yarn js:run src/{pattern-category}/{code|challenges}/{pattern-name}/file-to-run.js
+```
+
+### typescript
+
+```sh
+$ yarn ts:run src/{pattern-category}/{code|challenges}/{pattern-name}/file-to-run.ts
 ```
