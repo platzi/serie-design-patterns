@@ -260,7 +260,7 @@ class Director {
  * Main function
  */
 function appBuilder(director) {
-  console.log('--- [JS] Calling appBuilder ---');
+  console.log('--- [JS] Calling appBuilder ---\n');
 
   if (!director) {
     console.log('--- No director provided ---');

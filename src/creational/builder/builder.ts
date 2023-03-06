@@ -244,7 +244,7 @@ export class Director {
  * Main function
  */
 function appBuilder(director: Director) {
-  console.log('--- [TS] Calling appBuilder ---');
+  console.log('--- [TS] Calling appBuilder ---\n');
 
   if (!director) {
     console.log('--- No director provided ---');

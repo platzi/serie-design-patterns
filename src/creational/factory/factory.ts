@@ -81,7 +81,7 @@ class RhinoCarFactory implements CarFactory {
  * @param factory Car factory
  */
 function appFactory(factory: CarFactory) {
-  console.log('--- [TS] Calling appFactory ---');
+  console.log('--- [TS] Calling appFactory ---\n');
   if (!factory) {
     console.log('--- No factory provided ---');
     return;

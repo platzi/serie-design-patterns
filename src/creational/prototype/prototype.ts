@@ -306,7 +306,7 @@ class Director {
  * Main function
  */
 function appPrototype(director: Director) {
-  console.log('--- [TS] Calling appPrototype ---');
+  console.log('--- [TS] Calling appPrototype ---\n');
 
   if (!director) {
     console.log('--- No director provided ---');

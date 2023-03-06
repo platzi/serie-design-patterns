@@ -290,18 +290,14 @@ class Director {
    * Sedan CVT Edition customization steps
    */
   constructCvtEdition() {
-    this.productionLine.setAirBags(4);
-    this.productionLine.setColor('red');
-    this.productionLine.setEditon('CVT');
+    this.productionLine.setAirBags(4).setColor('red').setEditon('cvt');
   }
 
   /**
    * Sedan Signature Edition customization steps
    */
   constructSignatureEdition() {
-    this.productionLine.setAirBags(8);
-    this.productionLine.setColor('gray');
-    this.productionLine.setEditon('Signature');
+    this.productionLine.setAirBags(8).setColor('gray').setEditon('signature');
   }
 }
 
@@ -311,7 +307,7 @@ class Director {
  * Main function
  */
 function appPrototype(director) {
-  console.log('--- [JS] Calling appPrototype ---');
+  console.log('--- [JS] Calling appPrototype ---\n');
 
   if (!director) {
     console.log('--- No director provided ---');

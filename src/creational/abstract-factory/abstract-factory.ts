@@ -124,7 +124,7 @@ class HatchbackCarFactory implements CarAbstractFactory {
  * @param factory Car factory
  */
 function appCarFactory(factory: CarAbstractFactory) {
-  console.log('--- [TS] Calling appAbstractFactory ---');
+  console.log('--- [TS] Calling appAbstractFactory ---\n');
   if (!factory) {
     console.log('--- No factory provided ---');
     return;
