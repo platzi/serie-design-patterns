@@ -322,20 +322,20 @@ function appPrototype(director) {
 
   director.constructCvtEdition();
   const mastodonSedanCvt = mastodonSedanProductionLine.build();
-  console.log('--- Mastodon Sedan CVT ---');
+  console.log('--- Mastodon Sedan CVT ---\n');
   console.log(mastodonSedanCvt);
 
   const mastodonSedanCvtClone = mastodonSedanCvt.clone();
-  console.log('--- Mastodon Sedan CVT Clone ---');
+  console.log('--- Mastodon Sedan CVT Clone ---\n');
   console.log(mastodonSedanCvtClone);
 
   director.constructSignatureEdition();
   const mastodonSedanSignature = mastodonSedanProductionLine.build();
-  console.log('--- Mastodon Sedan Signature ---');
+  console.log('--- Mastodon Sedan Signature ---\n');
   console.log(mastodonSedanSignature);
 
   const mastodonSedanSignatureClone = mastodonSedanSignature.clone();
-  console.log('--- Mastodon Sedan Signature Clone ---');
+  console.log('--- Mastodon Sedan Signature Clone ---\n');
   console.log(mastodonSedanSignatureClone);
 }
 

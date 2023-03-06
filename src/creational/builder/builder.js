@@ -275,12 +275,12 @@ function appBuilder(director) {
 
   director.constructCvtEdition();
   const mastodnSedanCvt = mastodonSedanProductionLine.build();
-  console.log('--- Mastodon Sedan CVT ---');
+  console.log('--- Mastodon Sedan CVT ---\n');
   console.log(mastodnSedanCvt);
 
   director.constructSignatureEdition();
   const mastodonSedanSignature = mastodonSedanProductionLine.build();
-  console.log('--- Mastodon Sedan Signature ---');
+  console.log('--- Mastodon Sedan Signature ---\n');
   console.log(mastodonSedanSignature);
 }
 
