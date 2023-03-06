@@ -86,6 +86,7 @@ class RhinoCarFactory extends CarFactory {
  */
 function appFactory(factory) {
   console.log('--- [JS] Calling appFactory ---');
+
   if (!factory) {
     console.log('--- No factory provided ---');
     return;

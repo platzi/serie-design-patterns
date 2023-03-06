@@ -133,7 +133,7 @@ class HatchbackCarFactory {
  * @param {CarAbstractFactory} factory Car factory
  */
 function appAbstractFactory(factory) {
-  console.log('--- [JS] Calling appFactory ---');
+  console.log('--- [JS] Calling appAbstractFactory ---');
   if (!factory) {
     console.log('--- No factory provided ---');
     return;
