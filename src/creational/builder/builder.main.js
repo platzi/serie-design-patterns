@@ -245,7 +245,10 @@ class Director {
    * Sedan CVT Edition customization steps
    */
   constructCvtEdition() {
-    this.productionLine.setAirBags(4).setColor('blue').setEdition('CVT');
+    this.productionLine
+      .setAirBags(4)
+      .setColor('blue')
+      .setEdition('CVT');
   }
 
   /**
