@@ -54,11 +54,11 @@
  *  Change 2: Rename model to modelToCustomizeInLine as the param to be passed
  *  in production line object creation.
  *
- *  Change 3: Rename Car class to BaseCar.
+ *  Change 3: Renamed Car class to BaseCar.
  *
- *  Change 4: Rename class MastodonCar to MastodonSedanCar.
+ *  Change 4: Renamed class MastodonCar to MastodonSedanCar.
  *
- *  Change 5: Rename class RhinoCar to RhinoSedanCar.
+ *  Change 5: Renamed class RhinoCar to RhinoSedanCar.
  *
  *  Change 6: Delete function setModel and remove function call at build
  *  method in SedanProductionLine class. Make the model assignment directly
@@ -66,7 +66,7 @@
  *
  *  Change 7: Add more comments to code.
  *
- *  Change 8: Rename file to builder.main.js
+ *  Change 8: Renamed file to builder.main.js
  */
 
 // STEP 1
@@ -86,7 +86,7 @@ class CarProductionLine {
   }
 
   /**
-   * @param {number} edition sedan edition to be set to car
+   * @param {string} edition sedan edition to be set to car
    */
   setEdition(edition) {
     throw new Error('Method not implemented!');
@@ -245,20 +245,14 @@ class Director {
    * Sedan CVT Edition customization steps
    */
   constructCvtEdition() {
-    this.productionLine
-      .setAirBags(4)
-      .setColor('blue')
-      .setEdition('CVT');
+    this.productionLine.setAirBags(4).setColor('blue').setEdition('CVT');
   }
 
   /**
    * Sedan Signature Edition customization steps
    */
   constructSignatureEdition() {
-    this.productionLine
-      .setAirBags(8)
-      .setColor('red')
-      .setEdition('Signature');
+    this.productionLine.setAirBags(8).setColor('red').setEdition('Signature');
   }
 }
 

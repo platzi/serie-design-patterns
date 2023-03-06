@@ -51,14 +51,14 @@
  *  line don't create sedans, but receive and personalize sedan cars to
  *  match different versions (CVT, Signature).
  *
- *  Change 2: Rename model to modelToCustomizeInLine as the param to be passed
+ *  Change 2: Renamed model to modelToCustomizeInLine as the param to be passed
  *  in production line object creation.
  *
- *  Change 3: Rename Car class to BaseCar.
+ *  Change 3: Renamed Car class to BaseCar.
  *
- *  Change 4: Rename class MastodonCar to MastodonSedanCar.
+ *  Change 4: Renamed class MastodonCar to MastodonSedanCar.
  *
- *  Change 5: Rename class RhinoCar to RhinoSedanCar.
+ *  Change 5: Renamed class RhinoCar to RhinoSedanCar.
  *
  *  Change 6: Delete function setModel and remove function call at build
  *  method in SedanProductionLine class. Make the model assignment directly
@@ -73,7 +73,7 @@ export type AvailableColors = 'red' | 'black' | 'gray' | 'blue' | 'default';
 export interface CarProductionLine {
   setAirBags(howMany: number): CarProductionLine;
   setColor(color: AvailableColors): CarProductionLine;
-  setEdition(edition: string): CarProductionLine;
+  setEdition(edition: EditionsType): CarProductionLine;
   resetProductionLine(): void;
 }
 
@@ -229,14 +229,14 @@ export class Director {
    * Sedan CVT Edition customization steps
    */
   constructCvtEdition(): void {
-    this.productionLine.setAirBags(4).setColor('blue').setEdition('CVT');
+    this.productionLine.setAirBags(4).setColor('blue').setEdition('cvt');
   }
 
   /**
    * Sedan Signature Edition customization steps
    */
   constructSignatureEdition(): void {
-    this.productionLine.setAirBags(8).setColor('gray').setEdition('Signature');
+    this.productionLine.setAirBags(8).setColor('gray').setEdition('signature');
   }
 }
 
@@ -244,7 +244,7 @@ export class Director {
  * Main function
  */
 function appBuilder(director: Director) {
-  console.log('--- [JS] Calling appBuilder ---');
+  console.log('--- [TS] Calling appBuilder ---');
 
   if (!director) {
     console.log('--- No director provided ---');
