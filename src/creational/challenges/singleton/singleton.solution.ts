@@ -1,11 +1,7 @@
 /**
- * Account Class
+ * Product Class
  *
- * Besides the class diagram says we need to have getters and setters
- * function with specific names, we can use the get and set keywords
- * to implement them in a more "javascriptic" way.
- *
- * Using them we can access props with dot notation, eg:
+ * We can access props with dot notation, eg:
  *
  * account.owner
  * account.money
@@ -16,62 +12,69 @@
  * account.money = 42
  */
 
-/**
- * Class that represents a bank account.
- *
- * Receives two parameters for creation:
- *
- *  owner: string
- *  money: number
- */
-class Account {
-  private _owner: string;
-  private _money: number;
+class Product {
+  private _id: string;
+  private _name: string;
+  private _cost: number;
 
-  constructor(owner: string, money: number) {
-    this._owner = owner;
-    this._money = money;
+  constructor(id: string, name: string, cost: number) {
+    this._id = id;
+    this._name = name;
+    this._cost = cost;
   }
 
   /**
-   * Account owner attribute getter
-   * @returns customer name
+   * Product id attribute getter
+   * @returns product id
    */
-  public get owner(): string {
-    return this._owner;
+  get id() {
+    return this._id;
   }
 
   /**
-   * Account owner attribute setter
-   * @param  owner customer name
+   * Product id attribute setter
+   * @param id product id
    */
-  public set owner(owner: string) {
-    this._owner = owner;
+  set id(id: string) {
+    this._id = id;
   }
 
   /**
-   * Account money attribute getter
-   * @returns {number} customer money
+   * Product name attribute getter
+   * @returns product name
    */
-  public get money(): number {
-    return this._money;
+  get name() {
+    return this._name;
   }
 
   /**
-   * Account money attribute setter
-   * @param {number} money customer money
+   * Product name attribute setter
+   * @param name product name
    */
-  public set money(money: number) {
-    this._money = money;
+  set name(name: string) {
+    this._name = name;
+  }
+
+  /**
+   * Product cost attribute getter
+   * @returns product cost
+   */
+  get cost() {
+    return this._cost;
+  }
+
+  /**
+   * Product cost attribute setter
+   * @param cost product cost
+   */
+  set cost(cost: number) {
+    this._cost = cost;
   }
 }
 
-class Bank {
-  // static to be used without an instance
-  private static _instance: Bank;
-
-  // Hyphen (_) used here for name the getter as "accounts" and not have a conflict
-  private _accounts: Array<Account> = [];
+class ShoppingCar {
+  private static _instance: ShoppingCar;
+  private _products: Array<Product> = [];
 
   // Only available inside of the class
   private constructor() {}
@@ -85,46 +88,99 @@ class Bank {
    * All following calls to this method return the cached object.
    */
   public static getInstance() {
-    if (!Bank._instance) {
-      Bank._instance = new Bank();
+    if (!ShoppingCar._instance) {
+      ShoppingCar._instance = new ShoppingCar();
     }
 
-    return Bank._instance;
+    return ShoppingCar._instance;
   }
 
   /**
-   * Add new account to bank accounts list
-   * @param account new customer account
+   * Return products in shopping car
+   * @returns shopping car products
    */
-  public addNewAccount(account: Account) {
-    this._accounts.push(account);
+  get products() {
+    return this._products;
   }
 
   /**
-   * Return customer accounts
-   * @returns customers accounts
+   * Add new prodcut to shopping car products list
+   * @param product new product to be added
    */
-  public get accounts(): Array<Account> {
-    return this._accounts;
+  public add(product: Product) {
+    this._products.push(product);
+  }
+
+  /**
+   * Delete a product in shopping car
+   * @param {string} id product id
+   */
+  deleteById(id: string) {
+    this._products = this._products.filter(
+      (product) => product.id !== id
+    );
   }
 }
 
 function appSingleton() {
-  const bankFirstInstance = Bank.getInstance();
-  bankFirstInstance.addNewAccount(new Account('Yor Forger', 300));
-  const bankSecondInstance = Bank.getInstance();
-  bankSecondInstance.addNewAccount(new Account('Loid Forger', 200));
+  // Create new shopping car
+  const shoppingCar = ShoppingCar.getInstance();
 
-  /**
-   * This will be true! The same instance in being referenced for both
-   * variables.
-   */
-  console.log(bankFirstInstance === bankSecondInstance); // true
-  /**
-   * This will be true too!
-   * The pointer in memory is pointing to the same spot in the memory.
-   */
-  console.log(bankFirstInstance.accounts === bankSecondInstance.accounts);
+  // First product
+  shoppingCar.add(
+    new Product(
+      'BK001',
+      'Design Patterns: Elements of Reusable Object-Oriented Software',
+      750
+    )
+  );
+
+  // Second product
+  shoppingCar.add(
+    new Product('BK002', 'Introduction to Algorithms', 1000)
+  );
+
+  // Get existing shopping car instance
+  const shoppingCarNewInstance = ShoppingCar.getInstance();
+  shoppingCarNewInstance.add(new Product('BK003', 'Compilers', 900));
+
+  console.log('\n--- Shopping Car products ---\n');
+  console.log(shoppingCar.products);
+
+  console.log('\n--- Shopping Car New Instance products ---\n');
+  console.log(shoppingCarNewInstance.products);
+
+  // Products list must be the same
+  console.log('\n--- Are shopping cars products the same? ---\n');
+  console.log(shoppingCar.products === shoppingCarNewInstance.products); // true
+
+  // The number of elements in the list must be the same, in this case 3
+  console.log(
+    '\n--- Is shopping car number of products in both instances equal? ---\n'
+  );
+  console.log(
+    shoppingCar.products.length ===
+      shoppingCarNewInstance.products.length
+  );
+
+  // Let's delete second product
+  shoppingCarNewInstance.deleteById('BK002');
+  console.log('\n--- Product deleted: BK002---\n');
+
+  // The number of elements in the list must be the same, in this case 2
+  console.log('\n--- Shopping Car products ---\n');
+  console.log(shoppingCar.products);
+
+  console.log('\n--- Shopping Car New Instance products ---\n');
+  console.log(shoppingCarNewInstance.products);
+
+  console.log(
+    '\n--- Is shopping car number of products in both instances equal? ---\n'
+  );
+  console.log(
+    shoppingCar.products.length ===
+      shoppingCarNewInstance.products.length
+  );
 }
 
 appSingleton();
