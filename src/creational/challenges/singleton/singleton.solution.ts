@@ -3,13 +3,13 @@
  *
  * We can access props with dot notation, eg:
  *
- * account.owner
- * account.money
+ * product.id
+ * product.name
  *
  * And we can modify the values of the instance using the same idea, eg:
  *
- * account.owner = "New Owner"
- * account.money = 42
+ * product.id = "ID001"
+ * product.name = "Algorithms"
  */
 
 class Product {
