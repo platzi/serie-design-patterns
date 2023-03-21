@@ -102,7 +102,7 @@ class ShoppingCar {
   }
 
   /**
-   * Add new product to shopping car
+   * Add a product to shopping car
    * @param {Product} product new product to be added
    */
   add(product) {
@@ -165,13 +165,13 @@ function appSingleton() {
   shoppingCarNewInstance.deleteById('BK002');
   console.log('\n--- Product deleted: BK002---\n');
 
-  // The number of elements in the list must be the same, in this case 2
   console.log('\n--- Shopping Car products ---\n');
   console.log(shoppingCar.products);
 
   console.log('\n--- Shopping Car New Instance products ---\n');
   console.log(shoppingCarNewInstance.products);
 
+  // The number of elements in the list must be the same, in this case 2
   console.log(
     '\n--- Is shopping car number of products in both instances equal? ---\n'
   );
