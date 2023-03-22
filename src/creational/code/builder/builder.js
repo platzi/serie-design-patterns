@@ -245,14 +245,20 @@ class Director {
    * Sedan CVT Edition customization steps
    */
   constructCvtEdition() {
-    this.productionLine.setAirBags(4).setColor('blue').setEdition('CVT');
+    this.productionLine
+      .setAirBags(4)
+      .setColor('blue')
+      .setEdition('CVT');
   }
 
   /**
    * Sedan Signature Edition customization steps
    */
   constructSignatureEdition() {
-    this.productionLine.setAirBags(8).setColor('red').setEdition('Signature');
+    this.productionLine
+      .setAirBags(8)
+      .setColor('red')
+      .setEdition('Signature');
   }
 }
 
@@ -280,7 +286,7 @@ function appBuilder(director) {
 
   director.constructSignatureEdition();
   const mastodonSedanSignature = mastodonSedanProductionLine.build();
-  console.log('--- Mastodon Sedan Signature ---\n');
+  console.log('\n--- Mastodon Sedan Signature ---\n');
   console.log(mastodonSedanSignature);
 }
 

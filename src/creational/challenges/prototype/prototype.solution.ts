@@ -1,38 +1,17 @@
 /**
- * How to implement Prototype?
  *
- * 1. Declare a base class/interface prototype that contains
- *  clone methods.
+ * Prototype challenge:
  *
- *  If the base prototype is a class could be an abstract one
- *  to maintain some basic behaviour and implement the clone
- *  method in the sub class.
+ * Add RhinoCar class, create instances and clone it.
  *
- *  Base prototype:
- *    - BaseCar
+ * Steps followed to implemente the solution:
  *
- * 2. Create concrete products who inherits/implements from
- *  prototype class and override clone method functionality.
- *
- *  Concrete products:
- *    - MastodonSedanCar
- *
- * Notes:
- *  The code of this file has some modifications with the version showed
- *  during the course.
- *
- *  Change 1: Renamed Car class name to BaseCar.
- *
- *  Change 2: Renamed MastodonCar class name to MastodonSedanCar.
- *
- *  Change 3: Change return types of functions defined in CarProductionLine
- *  to return the actual instance to chain methods as we did in builder.ts.
- *
- *  Change 4: Change the way we define default values for params passed
- *  to BaseCar constructor.
- *
- *  Change 5: Rename Factory interface to CarFactory
- *
+ * 1. Add RhinoSedanCar class
+ * 2. Add RhinoSedanCarFactory class
+ * 3. Add setCarFactory method to CarProductionLine class to allow change
+ *  car factory to be used
+ * 4. Rename mastodonSedanProductionLine by sedanProductionLine
+ * 5. Add setProductionLineCarFactory method in Director class
  */
 
 type AvailableColors = 'red' | 'black' | 'gray' | 'blue' | 'default';
@@ -135,8 +114,6 @@ abstract class BaseCar {
     return this._model;
   }
 
-  // STEP 1
-
   /**
    * Abastract method to be implemented by all the classes
    * that inherits from BaseCar.
@@ -144,7 +121,6 @@ abstract class BaseCar {
   abstract clone(): BaseCar;
 }
 
-// STEP 2
 class MastodonSedanCar extends BaseCar {
   /**
    * We use constructor overload in this part to allow us to create
@@ -175,6 +151,36 @@ class MastodonSedanCar extends BaseCar {
   }
 }
 
+class RhinoSedanCar extends BaseCar {
+  /**
+   * We use constructor overload in this part to allow us to create
+   * a new RhinoSedanCar from zero or based in other instance of
+   * the class using the same constructor.
+   *
+   * About the overload, is the creation of different methods with
+   * the same name but with different parameters (different signature).
+   *
+   * @param carToClone instance of RhinoSedanCar
+   */
+  constructor(carToClone?: RhinoSedanCar);
+  constructor(carToClone: RhinoSedanCar) {
+    super({
+      edition: carToClone?.edition,
+      color: carToClone?.color,
+      model: 'sedan',
+      airBags: carToClone?.airBags,
+    });
+  }
+
+  /**
+   * @override clone() method
+   * @returns a mastodon sedan car configured as the original
+   */
+  clone(): RhinoSedanCar {
+    return new RhinoSedanCar(this);
+  }
+}
+
 // ------ [BEGIN] Use of Factory Method pattern ------
 
 interface CarFactory {
@@ -187,6 +193,12 @@ class MastodonSedanCarFactory implements CarFactory {
   }
 }
 
+class RhinoSedanCarFactory implements CarFactory {
+  create(): BaseCar {
+    return new RhinoSedanCar();
+  }
+}
+
 // ------ [END] Use of Factory Method pattern ------
 
 // ------ [BEGIN] Builder pattern similar code ------
@@ -195,6 +207,7 @@ interface CarProductionLine {
   setAirBags(howMany: number): SedanProductionLine;
   setColor(color: AvailableColors): SedanProductionLine;
   setEdition(edition: EditionsType): SedanProductionLine;
+  setCarFactory(factory: CarFactory): void;
   resetProductionLine(car: BaseCar): void;
 }
 
@@ -253,6 +266,15 @@ class SedanProductionLine implements CarProductionLine {
   }
 
   /**
+   * @override setCarFactory() method
+   * @param factory car factory to be used by production line
+   */
+  setCarFactory(factory: CarFactory) {
+    this.carFactory = factory;
+    this.resetProductionLine(this.carFactory.create());
+  }
+
+  /**
    * @override resetProductionLine() method
    * @param car new car to be customized by the production line
    */
@@ -283,6 +305,14 @@ class Director {
    */
   setProductionLine(productionLine: CarProductionLine) {
     this.productionLine = productionLine;
+  }
+
+  /**
+   * Set a new car factory to be used by the production line
+   * @param carFactory new car factory
+   */
+  setProductionLineCarFactory(carFactory: CarFactory) {
+    this.productionLine.setCarFactory(carFactory);
   }
 
   /**
@@ -319,30 +349,34 @@ function appPrototype(director: Director) {
     return;
   }
 
-  const mastodonSedanProductionLine = new SedanProductionLine({
+  const sedanProductionLine = new SedanProductionLine({
     factory: new MastodonSedanCarFactory(),
   });
 
-  director.setProductionLine(mastodonSedanProductionLine);
+  director.setProductionLine(sedanProductionLine);
 
   director.constructCvtEdition();
-  const mastodonSedanCvt = mastodonSedanProductionLine.build();
+  const mastodonSedanCvt = sedanProductionLine.build();
   console.log('--- Mastodon Sedan CVT ---\n');
   console.log(mastodonSedanCvt);
 
-  const mastodonSedanCvtPrototype = mastodonSedanCvt.clone();
+  const mastodonSedanCvtClone = mastodonSedanCvt.clone();
   console.log('\n--- Mastodon Sedan CVT Clone ---\n');
-  console.log(mastodonSedanCvtPrototype);
+  console.log(mastodonSedanCvtClone);
 
-  director.constructSignatureEdition();
-  const mastodonSedanSignature = mastodonSedanProductionLine.build();
-  console.log('\n--- Mastodon Sedan Signature ---\n');
-  console.log(mastodonSedanSignature);
+  /**
+   * 1. We update the car factory to used Rhino cars factory
+   * 2. Create Rhino cars and clone them
+   * */
+  director.setProductionLineCarFactory(new RhinoSedanCarFactory());
+  director.constructCvtEdition();
+  const rhinoSedanCvt = sedanProductionLine.build();
+  console.log('\n--- Rhino Sedan CVT ---\n');
+  console.log(rhinoSedanCvt);
 
-  const mastodonSedanSignaturePrototype =
-    mastodonSedanSignature.clone();
-  console.log('\n--- Mastodon Sedan Signature Clone ---\n');
-  console.log(mastodonSedanSignaturePrototype);
+  const rhinoSedanCvtClone = rhinoSedanCvt.clone();
+  console.log('\n--- Rhino Sedan CVT Clone ---\n');
+  console.log(rhinoSedanCvtClone);
 }
 
 appPrototype(new Director());

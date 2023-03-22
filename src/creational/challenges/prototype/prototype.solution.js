@@ -1,41 +1,19 @@
 /**
- * How to implement Prototype?
  *
- * 1. Declare a base class/interface prototype that contains
- *  clone methods.
+ * Prototype challenge:
  *
- *  If the base prototype is a class could be an abstract one
- *  to maintain some basic behaviour and implement the clone
- *  method in the sub class.
+ * Add RhinoCar class, create instances and clone it.
  *
- *  Base prototype:
- *    - BaseCar
+ * Steps followed to implemente the solution:
  *
- * 2. Create concrete products who inherits/implements from
- *  prototype class and override clone method functionality.
- *
- *  Concrete products:
- *    - MastodonSedanCar
- *
- * Notes:
- *  The code of this file has some modifications with the version showed
- *  during the course.
- *
- *  Change 1: Renamed Car class name to BaseCar.
- *
- *  Change 2: Renamed MastodonSedanCar class name to MastodonSedanCar.
- *
- *  Change 3: Change return types of functions defined in CarProductionLine
- *  to return the actual instance to chain methods as we did in builder.ts.
- *
- *  Change 4: Change the way we define default values for params passed
- *  to BaseCar constructor.
- *
- *  Change 5: Rename Factory interface to CarFactory
- *
+ * 1. Add RhinoSedanCar class
+ * 2. Add RhinoSedanCarFactory class
+ * 3. Add setCarFactory method to CarProductionLine class to allow change
+ *  car factory to be used
+ * 4. Rename mastodonSedanProductionLine by sedanProductionLine
+ * 5. Add setProductionLineCarFactory method in Director class
  */
 
-// STEP 1
 class BaseCar {
   /**
    * In case that no value for some property is passed, a default
@@ -131,7 +109,6 @@ class BaseCar {
   }
 }
 
-// STEP 2
 class MastodonSedanCar extends BaseCar {
   /**
    * Since JS is not strict with the functions signature
@@ -158,6 +135,32 @@ class MastodonSedanCar extends BaseCar {
   }
 }
 
+class RhinoSedanCar extends BaseCar {
+  /**
+   * Since JS is not strict with the functions signature
+   * verification we don't need to do constructor overload.
+   * We can use the same signature for all the cases.
+   *
+   * @param carToClone instance of MastodonSedanCar
+   */
+  constructor(carToClone) {
+    super({
+      edition: carToClone?.edition,
+      model: 'sedan',
+      airBags: carToClone?.airBags,
+      color: carToClone?.color,
+    });
+  }
+
+  /**
+   * @override clone() method
+   * @returns a mastodon sedan car configured as the original
+   */
+  clone() {
+    return new RhinoSedanCar(this);
+  }
+}
+
 // ------ [BEGIN] Use of Factory Method pattern ------
 
 class CarFactory {
@@ -169,6 +172,12 @@ class CarFactory {
 class MastodonSedanCarFactory extends CarFactory {
   create() {
     return new MastodonSedanCar();
+  }
+}
+
+class RhinoSedanCarFactory extends CarFactory {
+  create() {
+    return new RhinoSedanCar();
   }
 }
 
@@ -195,6 +204,13 @@ class CarProductionLine {
    * @param {string} color color to be set to car
    */
   setColor(color) {
+    throw new Error('Method not implemented!');
+  }
+
+  /**
+   * @param {CarFactory} factory car factory used for production line
+   */
+  setCarFactory(factory) {
     throw new Error('Method not implemented!');
   }
 
@@ -266,6 +282,7 @@ class SedanProductionLine extends CarProductionLine {
    */
   setCarFactory(factory) {
     this.carFactory = factory;
+    this.resetProductionLine(this.carFactory.create());
   }
 
   /**
@@ -300,6 +317,14 @@ class Director {
   }
 
   /**
+   * Set a new car factory to be used by the production line
+   * @param {CarFactory} carFactory new car factory
+   */
+  setProductionLineCarFactory(carFactory) {
+    this.productionLine.setCarFactory(carFactory);
+  }
+
+  /**
    * Sedan CVT Edition customization steps
    */
   constructCvtEdition() {
@@ -330,14 +355,14 @@ function appPrototype(director) {
     return;
   }
 
-  const mastodonSedanProductionLine = new SedanProductionLine({
+  const sedanProductionLine = new SedanProductionLine({
     factory: new MastodonSedanCarFactory(),
   });
 
-  director.setProductionLine(mastodonSedanProductionLine);
+  director.setProductionLine(sedanProductionLine);
 
   director.constructCvtEdition();
-  const mastodonSedanCvt = mastodonSedanProductionLine.build();
+  const mastodonSedanCvt = sedanProductionLine.build();
   console.log('--- Mastodon Sedan CVT ---\n');
   console.log(mastodonSedanCvt);
 
@@ -345,14 +370,19 @@ function appPrototype(director) {
   console.log('\n--- Mastodon Sedan CVT Clone ---\n');
   console.log(mastodonSedanCvtClone);
 
-  director.constructSignatureEdition();
-  const mastodonSedanSignature = mastodonSedanProductionLine.build();
-  console.log('\n--- Mastodon Sedan Signature ---\n');
-  console.log(mastodonSedanSignature);
+  /**
+   * 1. We update the car factory to used Rhino cars factory
+   * 2. Create Rhino cars and clone them
+   * */
+  director.setProductionLineCarFactory(new RhinoSedanCarFactory());
+  director.constructCvtEdition();
+  const rhinoSedanCvt = sedanProductionLine.build();
+  console.log('\n--- Rhino Sedan CVT ---\n');
+  console.log(rhinoSedanCvt);
 
-  const mastodonSedanSignatureClone = mastodonSedanSignature.clone();
-  console.log('\n--- Mastodon Sedan Signature Clone ---\n');
-  console.log(mastodonSedanSignatureClone);
+  const rhinoSedanCvtClone = rhinoSedanCvt.clone();
+  console.log('\n--- Rhino Sedan CVT Clone ---\n');
+  console.log(rhinoSedanCvtClone);
 }
 
 appPrototype(new Director());

@@ -67,7 +67,12 @@
  *  Change 7: Add more comments to code.
  */
 
-export type AvailableColors = 'red' | 'black' | 'gray' | 'blue' | 'default';
+export type AvailableColors =
+  | 'red'
+  | 'black'
+  | 'gray'
+  | 'blue'
+  | 'default';
 
 // STEP 1
 export interface CarProductionLine {
@@ -229,14 +234,20 @@ export class Director {
    * Sedan CVT Edition customization steps
    */
   constructCvtEdition(): void {
-    this.productionLine.setAirBags(4).setColor('blue').setEdition('cvt');
+    this.productionLine
+      .setAirBags(4)
+      .setColor('blue')
+      .setEdition('cvt');
   }
 
   /**
    * Sedan Signature Edition customization steps
    */
   constructSignatureEdition(): void {
-    this.productionLine.setAirBags(8).setColor('gray').setEdition('signature');
+    this.productionLine
+      .setAirBags(8)
+      .setColor('gray')
+      .setEdition('signature');
   }
 }
 
@@ -264,7 +275,7 @@ function appBuilder(director: Director) {
 
   director.constructSignatureEdition();
   const mastodonSedanSignature = mastodonSedanProductionLine.build();
-  console.log('--- Mastodon Sedan Signature ---\n');
+  console.log('\n--- Mastodon Sedan Signature ---\n');
   console.log(mastodonSedanSignature);
 }
 
