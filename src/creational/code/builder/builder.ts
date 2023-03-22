@@ -231,7 +231,7 @@ export class Director {
   }
 
   /**
-   * Sedan CVT Edition customization steps
+   * CVT Edition customization steps
    */
   constructCvtEdition(): void {
     this.productionLine
@@ -241,7 +241,7 @@ export class Director {
   }
 
   /**
-   * Sedan Signature Edition customization steps
+   * Signature Edition customization steps
    */
   constructSignatureEdition(): void {
     this.productionLine

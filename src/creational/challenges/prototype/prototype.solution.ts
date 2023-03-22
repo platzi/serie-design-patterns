@@ -4,7 +4,7 @@
  *
  * Add RhinoCar class, create instances and clone it.
  *
- * Steps followed to implemente the solution:
+ * Steps followed to implement the solution:
  *
  * 1. Add RhinoSedanCar class
  * 2. Add RhinoSedanCarFactory class
@@ -22,6 +22,8 @@ type CarConstructorParams = {
   airBags: number;
   color: AvailableColors;
 };
+
+// ----- Base product -----
 
 abstract class BaseCar {
   private _edition: EditionsType;
@@ -121,6 +123,8 @@ abstract class BaseCar {
   abstract clone(): BaseCar;
 }
 
+// ----- Concrete products -----
+
 class MastodonSedanCar extends BaseCar {
   /**
    * We use constructor overload in this part to allow us to create
@@ -181,11 +185,13 @@ class RhinoSedanCar extends BaseCar {
   }
 }
 
-// ------ [BEGIN] Use of Factory Method pattern ------
+// ----- Base factory -----
 
 interface CarFactory {
   create(): BaseCar;
 }
+
+// ----- Concrete factories -----
 
 class MastodonSedanCarFactory implements CarFactory {
   create(): BaseCar {
@@ -199,9 +205,7 @@ class RhinoSedanCarFactory implements CarFactory {
   }
 }
 
-// ------ [END] Use of Factory Method pattern ------
-
-// ------ [BEGIN] Builder pattern similar code ------
+// ----- Base builder -----
 
 interface CarProductionLine {
   setAirBags(howMany: number): SedanProductionLine;
@@ -210,6 +214,8 @@ interface CarProductionLine {
   setCarFactory(factory: CarFactory): void;
   resetProductionLine(car: BaseCar): void;
 }
+
+// ----- Concrete builder -----
 
 type ConstructorParams = { factory: CarFactory };
 class SedanProductionLine implements CarProductionLine {
@@ -296,6 +302,8 @@ class SedanProductionLine implements CarProductionLine {
   }
 }
 
+// ----- Director -----
+
 class Director {
   private productionLine!: CarProductionLine;
 
@@ -335,8 +343,6 @@ class Director {
       .setEdition('signature');
   }
 }
-
-// ------ [END] Builder pattern similar code ------
 
 /**
  * Main function

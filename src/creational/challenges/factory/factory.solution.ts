@@ -4,7 +4,7 @@
  *
  * Make a HttpAdapters factory.
  *
- * Steps followed to implemente the solution:
+ * Steps followed to implement the solution:
  *
  * 1. Add HttpAdapter base product class
  * 2. Add concrete implementation of HttpAdapter: RestHttpAdapter
@@ -12,7 +12,7 @@
  * 4. Add concrete implementation of HttpAdapterFactory: RestHttpAdapterFactory
  */
 
-// ----- Concrete product -----
+// ----- Base product -----
 
 /**
  * HttpAdapter base class
@@ -38,6 +38,8 @@ abstract class HttpAdapter {
     return this._type;
   }
 }
+
+// ----- Concrete product -----
 
 class RestHttpAdapter extends HttpAdapter {
   constructor() {
@@ -65,11 +67,13 @@ class RestHttpAdapter extends HttpAdapter {
   }
 }
 
-// ----- Factory -----
+// ----- Base Factory -----
 
 interface HttpAdapterFactory {
   makeAdapter(): HttpAdapter;
 }
+
+// ----- Concrete Factory -----
 
 class RestHttpAdapterFactory implements HttpAdapterFactory {
   /**

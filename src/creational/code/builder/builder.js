@@ -242,23 +242,23 @@ class Director {
   }
 
   /**
-   * Sedan CVT Edition customization steps
+   * CVT Edition customization steps
    */
   constructCvtEdition() {
     this.productionLine
       .setAirBags(4)
       .setColor('blue')
-      .setEdition('CVT');
+      .setEdition('cvt');
   }
 
   /**
-   * Sedan Signature Edition customization steps
+   * Signature Edition customization steps
    */
   constructSignatureEdition() {
     this.productionLine
       .setAirBags(8)
       .setColor('red')
-      .setEdition('Signature');
+      .setEdition('signature');
   }
 }
 

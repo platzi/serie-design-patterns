@@ -4,7 +4,7 @@
  *
  * Add RhinoCar class, create instances and clone it.
  *
- * Steps followed to implemente the solution:
+ * Steps followed to implement the solution:
  *
  * 1. Add RhinoSedanCar class
  * 2. Add RhinoSedanCarFactory class
@@ -13,6 +13,8 @@
  * 4. Rename mastodonSedanProductionLine by sedanProductionLine
  * 5. Add setProductionLineCarFactory method in Director class
  */
+
+// ----- Base product -----
 
 class BaseCar {
   /**
@@ -109,6 +111,8 @@ class BaseCar {
   }
 }
 
+// ----- Concrete products -----
+
 class MastodonSedanCar extends BaseCar {
   /**
    * Since JS is not strict with the functions signature
@@ -161,13 +165,15 @@ class RhinoSedanCar extends BaseCar {
   }
 }
 
-// ------ [BEGIN] Use of Factory Method pattern ------
+// ----- Base factory -----
 
 class CarFactory {
   create() {
     throw new Error('Method not implemented!');
   }
 }
+
+// ----- Concrete factories -----
 
 class MastodonSedanCarFactory extends CarFactory {
   create() {
@@ -181,9 +187,7 @@ class RhinoSedanCarFactory extends CarFactory {
   }
 }
 
-// ------ [END] Use of Factory Method pattern ------
-
-// ------ [BEGIN] Builder pattern similar code ------
+// ----- Base builder -----
 
 class CarProductionLine {
   /**
@@ -224,6 +228,8 @@ class CarProductionLine {
     throw new Error('Method not implemented!');
   }
 }
+
+// ----- Concrete builder -----
 
 class SedanProductionLine extends CarProductionLine {
   /**
@@ -307,6 +313,8 @@ class SedanProductionLine extends CarProductionLine {
   }
 }
 
+// ----- Director -----
+
 class Director {
   /**
    * Set the production line to be used for the director to build editions
@@ -342,8 +350,6 @@ class Director {
   }
 }
 
-// ------ [END] Builder pattern similar code ------
-
 /**
  * Main function
  */
@@ -371,7 +377,7 @@ function appPrototype(director) {
   console.log(mastodonSedanCvtClone);
 
   /**
-   * 1. We update the car factory to used Rhino cars factory
+   * 1. We update the car factory to use Rhino cars factory
    * 2. Create Rhino cars and clone them
    * */
   director.setProductionLineCarFactory(new RhinoSedanCarFactory());
