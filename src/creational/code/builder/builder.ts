@@ -67,15 +67,10 @@
  *  Change 7: Add more comments to code.
  */
 
-export type AvailableColors =
-  | 'red'
-  | 'black'
-  | 'gray'
-  | 'blue'
-  | 'default';
+type AvailableColors = 'red' | 'black' | 'gray' | 'blue' | 'default';
 
 // STEP 1
-export interface CarProductionLine {
+interface CarProductionLine {
   setAirBags(howMany: number): CarProductionLine;
   setColor(color: AvailableColors): CarProductionLine;
   setEdition(edition: EditionsType): CarProductionLine;

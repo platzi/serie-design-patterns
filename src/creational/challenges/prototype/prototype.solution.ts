@@ -224,16 +224,6 @@ class SedanProductionLine implements CarProductionLine {
 
   /**
    *
-   * Unlike the original implementation in builder.ts, this version
-   * of sedan production line receives as param a car factory instance
-   * that is in charge of create new cars to be customized. The line
-   * will not know anything about the kind of car that the factory is
-   * creating.
-   *
-   * In builder.ts the prodction line was "composed" by the car to
-   * customize, here we have an aggregation relationship, the production
-   * line "has" a car.
-   *
    * @param factory car factory instance
    */
   constructor({ factory }: ConstructorParams) {
