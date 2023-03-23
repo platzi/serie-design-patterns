@@ -1,15 +1,13 @@
 /**
- * Product Class
  *
- * We can access props with dot notation, eg:
+ * Singleton challenge:
  *
- * product.id
- * product.name
+ * Implement a Shopping car using singleton.
  *
- * And we can modify the values of the instance using the same idea, eg:
+ * Steps followed to implement the solution:
  *
- * product.id = "ID001"
- * product.name = "Algorithms"
+ * 1. Add Product class
+ * 2. Add ShoppingCar class and follow guidelines to implement it as singleton
  */
 
 class Product {
